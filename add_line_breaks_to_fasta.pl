@@ -31,15 +31,15 @@ $/=">";
 while (<IN>) {
 	chomp;
 	my ($id,$seqs)=split/\n/,$_,2;
-	$seqs=~s/\R//g;									#如果序列分了很多行,但是不等长,先合并为一行
+	$seqs=~s/\R//g;								#如果序列分了很多行,但是不等长,先合并为一行
 	my $length=length $seqs;						#获取序列长度
 	
 	my ($i,@seqs);
 	for ($i=0;$i<$length;$i += $num) {				#$i循环一次 + $num
-		my $after = substr($seqs,$i,$num-1);		#不能重新赋值给$seqs
+		my $after = substr($seqs,$i,$num-1);			#不能重新赋值给$seqs
 		push @seqs,$after;
 	}
-	$seqs = join "\n",@seqs;						#用 \n 把数组里的序列连起来
+	$seqs = join "\n",@seqs;					#用 \n 把数组里的序列连起来
 	print OUT ">$id\n$seqs\n";
 }
 $/="\n";
